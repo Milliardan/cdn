@@ -1,4 +1,9 @@
-// Создаем стили виджета и добавляем их в документ
+// Определяем контейнер для вставки виджета
+const scriptTag = document.currentScript;
+const widgetContainer = document.createElement("div");
+widgetContainer.id = "widget-container";
+
+// Создаем стили виджета
 const style = document.createElement("style");
 style.textContent = `
     #widget-container {
@@ -13,18 +18,16 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Создаем HTML-элементы для виджета
-const widgetContainer = document.createElement("div");
-widgetContainer.id = "widget-container";
-
+// Создаем HTML-элемент с текстом
 const widgetText = document.createElement("p");
 widgetText.id = "widget-text";
 widgetText.textContent = "Привет, ты меня видишь!";
 widgetContainer.appendChild(widgetText);
 
-document.body.appendChild(widgetContainer);
+// Вставляем виджет перед текущим <script> тегом
+scriptTag.parentNode.insertBefore(widgetContainer, scriptTag);
 
-// Добавляем логику для изменения цвета текста при наведении
+// Добавляем логику изменения цвета текста при наведении
 widgetText.addEventListener("mouseover", function () {
     widgetText.style.color = "red";
 });
